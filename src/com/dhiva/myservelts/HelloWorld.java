@@ -21,8 +21,12 @@ public class HelloWorld extends HttpServlet {
 
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
 		response.setContentType("text/plain");
+		String s = "Hello, world";
+		response.setContentLength(s.getBytes().length);
 		response.getWriter().println("Hello, world");
+		response.getWriter().flush();
 	}
 
 	
