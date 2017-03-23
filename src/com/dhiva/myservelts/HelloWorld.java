@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class HelloWorld
@@ -40,7 +41,8 @@ public class HelloWorld extends HttpServlet {
 		String passwd = request.getParameter("passwd");
 		if(loginID.equals(login) && password.equals(passwd)){
 			
-			
+			HttpSession session = request.getSession();
+			session.setAttribute("user", "Pankaj");
 			String s = "Hello,"+login;
 	    	response.setStatus(200);
 			response.setContentType("text/plain");
@@ -54,5 +56,12 @@ public class HelloWorld extends HttpServlet {
 			out.flush();
 			//response.sendRedirect("LoginSuccess.jsp");
 		}
+			else{
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+			PrintWriter out= response.getWriter();
+			out.println("<font color=red>Either user name or password is wrong.</font>");
+			rd.include(request, response);
+		}
+
 	}	
 }
