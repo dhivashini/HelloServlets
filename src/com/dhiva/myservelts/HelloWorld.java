@@ -42,7 +42,8 @@ public class HelloWorld extends HttpServlet {
 		if(loginID.equals(login) && password.equals(passwd)){
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("user", "Pankaj");
+			session.setAttribute("login", "dhiva");
+			session.setMaxInactiveInterval(30*60);
 			String s = "Hello,"+login;
 	    	response.setStatus(200);
 			response.setContentType("text/plain");
